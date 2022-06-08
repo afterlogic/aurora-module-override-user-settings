@@ -1,18 +1,18 @@
 {
-  "Disabled": [
-    true,
-    "bool"
-  ],
-  "Disabled_Description": [
-    "",
-    "string"
-  ],
-  "Domains": [
-    [],
-    "array"
-  ],
-  "Domains_Description": [
-    "",
-    "string"
-  ]
+	"Disabled": [
+		true,
+		"bool"
+	],
+	"Disabled_Description": [
+		"",
+		"string"
+	],
+	"Domains": [
+		[],
+		"array"
+	],
+	"Domains_Description": [
+		"",
+		"string"
+	]
 }
