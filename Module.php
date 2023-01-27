@@ -16,37 +16,31 @@ namespace Aurora\Modules\OverrideUserSettings;
  */
 class Module extends \Aurora\System\Module\AbstractModule
 {
-	public function init() 
-	{
-		$this->subscribeEvent('Core::CreateUser::after', array($this, 'onAfterCreateUser'));
-	}
+    public function init()
+    {
+        $this->subscribeEvent('Core::CreateUser::after', array($this, 'onAfterCreateUser'));
+    }
 
-	public function onAfterCreateUser(&$aArgs, &$mResult)
-	{
-		$iUserId = isset($mResult) && (int) $mResult > 0 ? (int) $mResult : 0;
-		if ($iUserId > 0)
-		{
-			$oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserUnchecked($iUserId);
+    public function onAfterCreateUser(&$aArgs, &$mResult)
+    {
+        $iUserId = isset($mResult) && (int) $mResult > 0 ? (int) $mResult : 0;
+        if ($iUserId > 0) {
+            $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserUnchecked($iUserId);
 
-			if ($oUser)
-			{
-				$aDomains = $this->getConfig('Domains', []);
-				if (is_array($aDomains) && !empty($aDomains))
-				{
-					$sUserDomain = \MailSo\Base\Utils::GetDomainFromEmail($oUser->PublicId);
-					foreach ($aDomains as $aDomain)
-					{
-						if ($aDomain["name"] === $sUserDomain && isset($aDomain["modules"]) && is_array($aDomain["modules"]))
-						{
-							foreach ($aDomain["modules"] as $sModuleName)
-							{
-								$oUser->disableModule($sModuleName);
-								\Aurora\Modules\Core\Module::Decorator()->UpdateUserObject($oUser);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+            if ($oUser) {
+                $aDomains = $this->getConfig('Domains', []);
+                if (is_array($aDomains) && !empty($aDomains)) {
+                    $sUserDomain = \MailSo\Base\Utils::GetDomainFromEmail($oUser->PublicId);
+                    foreach ($aDomains as $aDomain) {
+                        if ($aDomain["name"] === $sUserDomain && isset($aDomain["modules"]) && is_array($aDomain["modules"])) {
+                            foreach ($aDomain["modules"] as $sModuleName) {
+                                $oUser->disableModule($sModuleName);
+                                \Aurora\Modules\Core\Module::Decorator()->UpdateUserObject($oUser);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
