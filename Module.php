@@ -25,7 +25,7 @@ class Module extends \Aurora\System\Module\AbstractModule
     {
         $iUserId = isset($mResult) && (int) $mResult > 0 ? (int) $mResult : 0;
         if ($iUserId > 0) {
-            $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserUnchecked($iUserId);
+            $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserWithoutRoleCheck($iUserId);
 
             if ($oUser) {
                 $aDomains = $this->getConfig('Domains', []);
