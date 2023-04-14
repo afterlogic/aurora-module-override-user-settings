@@ -21,6 +21,15 @@ class Module extends \Aurora\System\Module\AbstractModule
         $this->subscribeEvent('Core::CreateUser::after', array($this, 'onAfterCreateUser'));
     }
 
+    /**
+     *
+     * @return Module
+     */
+    public static function Decorator()
+    {
+        return parent::Decorator();
+    }
+
     public function onAfterCreateUser(&$aArgs, &$mResult)
     {
         $iUserId = isset($mResult) && (int) $mResult > 0 ? (int) $mResult : 0;
