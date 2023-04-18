@@ -30,6 +30,15 @@ class Module extends \Aurora\System\Module\AbstractModule
         return parent::Decorator();
     }
 
+    /**
+     *
+     * @return Settings
+     */
+    protected function GetModuleSettings()
+    {
+        return $this->oModuleSettings;
+    }
+
     public function onAfterCreateUser(&$aArgs, &$mResult)
     {
         $iUserId = isset($mResult) && (int) $mResult > 0 ? (int) $mResult : 0;
