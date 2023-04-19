@@ -12,6 +12,8 @@ namespace Aurora\Modules\OverrideUserSettings;
  * @license https://afterlogic.com/products/common-licensing Afterlogic Software License
  * @copyright Copyright (c) 2023, Afterlogic Corp.
  *
+ * @property Settings $oModuleSettings
+ *
  * @package Modules
  */
 class Module extends \Aurora\System\Module\AbstractModule
@@ -46,7 +48,7 @@ class Module extends \Aurora\System\Module\AbstractModule
             $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserWithoutRoleCheck($iUserId);
 
             if ($oUser) {
-                $aDomains = $this->getConfig('Domains', []);
+                $aDomains = $this->oModuleSettings->Domains;
                 if (is_array($aDomains) && !empty($aDomains)) {
                     $sUserDomain = \MailSo\Base\Utils::GetDomainFromEmail($oUser->PublicId);
                     foreach ($aDomains as $aDomain) {
