@@ -51,7 +51,7 @@ class Module extends \Aurora\System\Module\AbstractModule
     {
         $iUserId = isset($mResult) && (int) $mResult > 0 ? (int) $mResult : 0;
         if ($iUserId > 0) {
-            $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserWithoutRoleCheck($iUserId);
+            $oUser = \Aurora\Api::getUserById($iUserId);
 
             if ($oUser) {
                 $aDomains = $this->oModuleSettings->Domains;
